@@ -22,8 +22,11 @@ async def main():
         *(generate_shot(i) for i in range(1, 6)),
         return_exceptions=True                    # 一个出错不影响其他
     )
-    for r in results:
-        print(r)
+    for i, r in enumerate(results, start=1):
+        if isinstance(r, Exception):
+            print(f"镜头{i}：出错 -> {type(r).__name__}: {r}")
+        else:
+            print(r)
     print(f"总耗时：{time.perf_counter() - start:.1f} 秒")   # 约 2~3 秒，而不是 5~15 秒
 
 asyncio.run(main())
