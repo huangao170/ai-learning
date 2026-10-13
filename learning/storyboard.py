@@ -53,4 +53,7 @@ async def main():
     print(f"总耗时：{time.perf_counter() - start:.1f} 秒")
 
 
+load_dotenv()
+os.environ["NO_PROXY"] = os.environ.get("NO_PROXY", "") + ",api.deepseek.com"  # DeepSeek 直连，不走代理
+
 asyncio.run(main())
